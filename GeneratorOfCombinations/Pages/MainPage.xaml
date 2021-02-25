@@ -4,11 +4,39 @@
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 	  xmlns:local="clr-namespace:GeneratorOfCombinations"
+	  xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
 	  mc:Ignorable="d" 
 	  d:DesignHeight="450" d:DesignWidth="800"
 	  Title="MainPage">
 
 	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+
+		<wpfTool:RichTextBox Margin="5"
+							 Block.LineHeight="1"
+							 Text="{Binding Set}" />
+
+		<StackPanel Grid.Column="1"
+					VerticalAlignment="Center"
+					HorizontalAlignment="Center">
+
+			<TextBox Padding="10 5" 
+					 Margin="5"
+					 Text="{Binding CombinationSize}"/>
+			
+			<Button Content="Calculate"
+					Padding="10 5"
+					Margin="5" 
+					Command="{Binding CalculateCommand}"/>
+		</StackPanel>
+
+		<ListBox Margin="5"
+				 Grid.Column="2"
+				 ItemsSource="{Binding Combinations}"/>
 
 	</Grid>
 </local:BasePage>
