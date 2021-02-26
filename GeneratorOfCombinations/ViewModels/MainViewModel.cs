@@ -10,7 +10,7 @@ namespace GeneratorOfCombinations
 		/// <summary>
 		/// A set of elements 
 		/// </summary>
-		public string Set { get; set; }
+		public List<string> Set { get; set; }
 
 		/// <summary>
 		/// Combination size
