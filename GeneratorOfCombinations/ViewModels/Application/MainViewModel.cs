@@ -41,7 +41,7 @@ namespace GeneratorOfCombinations
 		public MainViewModel()
 		{
 			// Create commands
-			CalculateCommand = new RelayCommand(CalculateCombinations);
+			CalculateCommand = new RelayCommand(CalculateCombinationsAsync);
 		}
 
 		#endregion
@@ -51,11 +51,38 @@ namespace GeneratorOfCombinations
 		/// <summary>
 		/// Calculate сombinations
 		/// </summary>
-		public void CalculateCombinations()
+		public async void CalculateCombinationsAsync()
 		{
 			if (!int.TryParse(CombinationSize, out int size))
 			{
-				//TODO: Implement Dialog Window
+				await DI.UI.ShowMessage(new MessageBoxDialogViewModel()
+				{
+					Title = "Wrong format",
+					Message = "Combination size must be a number"
+				});
+
+				return;
+			}
+
+			if (Set == null || Set.Count == 0)
+			{
+				await DI.UI.ShowMessage(new MessageBoxDialogViewModel()
+				{
+					Title = "Wrong format",
+					Message = "Set must be filled"
+				});
+
+				return;
+			}
+
+			if (Set.Count < size)
+			{
+				await DI.UI.ShowMessage(new MessageBoxDialogViewModel()
+				{
+					Title = "Wrong format",
+					Message = "The number of elements in the set must be greater than the size of the combination"
+				});
+
 				return;
 			}
 
