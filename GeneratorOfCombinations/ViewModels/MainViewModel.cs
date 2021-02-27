@@ -53,6 +53,13 @@ namespace GeneratorOfCombinations
 		/// </summary>
 		public void CalculateCombinations()
 		{
+			if (!int.TryParse(CombinationSize, out int size))
+			{
+				//TODO: Implement Dialog Window
+				return;
+			}
+
+			Combinations = Generator.Generate(Set, size);
 		}
 
 		#endregion
