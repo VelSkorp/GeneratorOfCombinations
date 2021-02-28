@@ -18,7 +18,11 @@
 
 		<wpfTool:RichTextBox Margin="5"
 							 Block.LineHeight="1"
-							 Text="{Binding Set,Converter={local:RichTextBoxTextValueConverter}}" />
+							 Text="{Binding Set,Converter={local:RichTextBoxTextValueConverter}}">
+			<wpfTool:RichTextBox.TextFormatter>
+				<wpfTool:PlainTextFormatter />
+			</wpfTool:RichTextBox.TextFormatter>
+		</wpfTool:RichTextBox>
 
 		<StackPanel Grid.Column="1"
 					VerticalAlignment="Center"

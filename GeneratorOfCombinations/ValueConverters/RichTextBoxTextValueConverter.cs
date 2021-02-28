@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Text.RegularExpressions;
 
 namespace GeneratorOfCombinations
 {
@@ -14,16 +14,12 @@ namespace GeneratorOfCombinations
 
 		public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			var regex = new Regex(@"{\\ltrch (\w+)}");
-			var setOfItems = new List<string>();
 			string stringValue = value as string;
-
-			MatchCollection matches = regex.Matches(stringValue);
-
-			foreach (Match match in matches)
-			{
-				setOfItems.Add(match.Groups[1].Value);
-			}
+			List<string> setOfItems = stringValue.Replace("\r", string.Empty)
+												 .TrimEnd('\n')
+												 .Split('\n')
+												 .Where(item => !string.IsNullOrEmpty(item) && !string.IsNullOrWhiteSpace(item))
+												 .ToList();
 
 			return setOfItems;
 		}
