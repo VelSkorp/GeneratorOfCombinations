@@ -26,7 +26,8 @@
 
 			<TextBox Padding="10 5" 
 					 Margin="5"
-					 Text="{Binding CombinationSize}"/>
+					 Text="{Binding CombinationSize}"
+					 Tag="Combination size"/>
 			
 			<Button Content="Calculate"
 					Padding="10 5"
