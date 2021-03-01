@@ -18,7 +18,9 @@
 
 		<wpfTool:RichTextBox Margin="5"
 							 Block.LineHeight="1"
-							 Text="{Binding Set,Converter={local:RichTextBoxTextValueConverter}}">
+							 Text="{Binding Set,Converter={local:RichTextBoxTextValueConverter}}"
+							 Tag="Item entry window:&#x0a;(each item in a new line)">
+
 			<wpfTool:RichTextBox.TextFormatter>
 				<wpfTool:PlainTextFormatter />
 			</wpfTool:RichTextBox.TextFormatter>
@@ -41,6 +43,7 @@
 
 		<ListBox Margin="5"
 				 Grid.Column="2"
+				 Tag="Result window"
 				 ItemsSource="{Binding Combinations}"/>
 
 	</Grid>

@@ -9,7 +9,9 @@ namespace GeneratorOfCombinations
 	{
 		public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			return value;
+			List<string> set = value as List<string>;
+
+			return set.Count == 0 ? string.Empty : set.Aggregate((item, item2) => $"{item}\r\n{item2}");
 		}
 
 		public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

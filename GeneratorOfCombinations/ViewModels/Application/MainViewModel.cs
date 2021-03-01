@@ -10,7 +10,7 @@ namespace GeneratorOfCombinations
 		/// <summary>
 		/// A set of elements 
 		/// </summary>
-		public List<string> Set { get; set; }
+		public List<string> Set { get; set; } = new List<string>();
 
 		/// <summary>
 		/// Combination size
@@ -60,6 +60,8 @@ namespace GeneratorOfCombinations
 					Title = "Wrong format",
 					Message = "Combination size must be a number"
 				});
+
+				Combinations = new List<string>();
 
 				return;
 			}
