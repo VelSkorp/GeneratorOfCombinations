@@ -39,6 +39,11 @@
 					Padding="10 5"
 					Margin="5" 
 					Command="{Binding CalculateCommand}"/>
+			
+			<Button Content="Clear"
+					Padding="10 5"
+					Margin="5" 
+					Command="{Binding ClearCommand}"/>
 		</StackPanel>
 
 		<ListBox Margin="5"

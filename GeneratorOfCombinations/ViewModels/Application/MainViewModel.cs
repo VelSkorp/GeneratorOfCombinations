@@ -31,6 +31,11 @@ namespace GeneratorOfCombinations
 		/// </summary>
 		public ICommand CalculateCommand { get; set; }
 
+		/// <summary>
+		/// The command to clear combinations
+		/// </summary>
+		public ICommand ClearCommand { get; set; }
+
 		#endregion
 
 		#region Constructor
@@ -42,11 +47,20 @@ namespace GeneratorOfCombinations
 		{
 			// Create commands
 			CalculateCommand = new RelayCommand(CalculateCombinationsAsync);
+			ClearCommand = new RelayCommand(ClearCombinations);
 		}
 
 		#endregion
 
 		#region Command Methods
+
+		/// <summary>
+		/// Clear сombinations
+		/// </summary>
+		public void ClearCombinations()
+		{
+			Combinations = new List<string>();
+		}
 
 		/// <summary>
 		/// Calculate сombinations
@@ -60,8 +74,6 @@ namespace GeneratorOfCombinations
 					Title = "Wrong format",
 					Message = "Combination size must be a number"
 				});
-
-				Combinations = new List<string>();
 
 				return;
 			}
