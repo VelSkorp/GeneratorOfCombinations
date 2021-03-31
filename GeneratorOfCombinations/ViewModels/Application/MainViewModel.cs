@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace GeneratorOfCombinations
@@ -21,6 +22,11 @@ namespace GeneratorOfCombinations
 		/// Possible combinations of m elements from the set of element with size n. 
 		/// </summary>
 		public List<string> Combinations { get; set; }
+
+		/// <summary>
+		/// A flag indicating if the calculate command is running
+		/// </summary>
+		public bool CalculateIsRunning { get; set; }
 
 		#endregion
 
@@ -46,7 +52,7 @@ namespace GeneratorOfCombinations
 		public MainViewModel()
 		{
 			// Create commands
-			CalculateCommand = new RelayCommand(CalculateCombinationsAsync);
+			CalculateCommand = new RelayCommand(async () => await CalculateCombinationsAsync());
 			ClearCommand = new RelayCommand(ClearCombinations);
 		}
 
@@ -59,48 +65,53 @@ namespace GeneratorOfCombinations
 		/// </summary>
 		public void ClearCombinations()
 		{
-			Combinations = new List<string>();
+			Combinations.Clear();
 		}
 
 		/// <summary>
 		/// Calculate сombinations
 		/// </summary>
-		public async void CalculateCombinationsAsync()
+		public async Task CalculateCombinationsAsync()
 		{
-			if (!int.TryParse(CombinationSize, out int size))
+			await RunCommandAsync(() => CalculateIsRunning, async () =>
 			{
-				await DI.UI.ShowMessage(new MessageBoxDialogViewModel()
+				if (!int.TryParse(CombinationSize, out int size))
 				{
-					Title = "Wrong format",
-					Message = "Combination size must be a number"
-				});
+					await DI.UI.ShowMessage(new MessageBoxDialogViewModel()
+					{
+						Title = "Wrong format",
+						Message = "Combination size must be a number"
+					});
 
-				return;
-			}
+					return;
+				}
 
-			if (Set == null || Set.Count == 0)
-			{
-				await DI.UI.ShowMessage(new MessageBoxDialogViewModel()
+				if (Set == null || Set.Count == 0)
 				{
-					Title = "Wrong format",
-					Message = "Set must be filled"
-				});
+					await DI.UI.ShowMessage(new MessageBoxDialogViewModel()
+					{
+						Title = "Wrong format",
+						Message = "Set must be filled"
+					});
 
-				return;
-			}
+					return;
+				}
 
-			if (Set.Count < size)
-			{
-				await DI.UI.ShowMessage(new MessageBoxDialogViewModel()
+				if (Set.Count < size)
 				{
-					Title = "Wrong format",
-					Message = "The number of elements in the set must be greater than the size of the combination"
-				});
+					await DI.UI.ShowMessage(new MessageBoxDialogViewModel()
+					{
+						Title = "Wrong format",
+						Message = "The number of elements in the set must be greater than the size of the combination"
+					});
 
-				return;
-			}
+					return;
+				}
 
-			Combinations = Generator.Generate(Set, size);
+				await Task.Delay(500);
+
+				Combinations = Generator.Generate(Set, size);
+			});
 		}
 
 		#endregion

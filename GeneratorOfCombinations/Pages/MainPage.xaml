@@ -34,8 +34,9 @@
 					 Margin="5"
 					 Text="{Binding CombinationSize}"
 					 Tag="Combination size"/>
-			
+
 			<Button Content="Calculate"
+					local:IsBusyProperty.Value="{Binding CalculateIsRunning}"
 					Padding="10 5"
 					Margin="5" 
 					Command="{Binding CalculateCommand}"/>
