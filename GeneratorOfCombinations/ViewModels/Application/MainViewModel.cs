@@ -65,7 +65,7 @@ namespace GeneratorOfCombinations
 		/// </summary>
 		public void ClearCombinations()
 		{
-			Combinations.Clear();
+			Combinations = new List<string>();
 		}
 
 		/// <summary>
