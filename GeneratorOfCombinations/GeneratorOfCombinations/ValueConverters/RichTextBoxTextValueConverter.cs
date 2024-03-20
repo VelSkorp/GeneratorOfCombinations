@@ -9,15 +9,15 @@ namespace GeneratorOfCombinations
 	{
 		public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			List<string> set = value as List<string>;
+			var set = value as List<string>;
 
 			return set.Count == 0 ? string.Empty : set.Aggregate((item, item2) => $"{item}\r\n{item2}");
 		}
 
 		public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			string stringValue = value as string;
-			List<string> setOfItems = stringValue.Replace("\r", string.Empty)
+			var stringValue = value as string;
+			var setOfItems = stringValue.Replace("\r", string.Empty)
 												 .TrimEnd('\n')
 												 .Split('\n')
 												 .Where(item => !string.IsNullOrEmpty(item) && !string.IsNullOrWhiteSpace(item))

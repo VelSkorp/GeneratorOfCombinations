@@ -65,7 +65,7 @@ namespace GeneratorOfCombinations
 		/// </summary>
 		public void ClearCombinations()
 		{
-			Combinations = new List<string>();
+			Combinations.Clear();
 		}
 
 		/// <summary>
@@ -75,7 +75,7 @@ namespace GeneratorOfCombinations
 		{
 			await RunCommandAsync(() => CalculateIsRunning, async () =>
 			{
-				if (!int.TryParse(CombinationSize, out int size))
+				if (!int.TryParse(CombinationSize, out var size))
 				{
 					await DI.UI.ShowMessage(new MessageBoxDialogViewModel()
 					{
@@ -86,7 +86,7 @@ namespace GeneratorOfCombinations
 					return;
 				}
 
-				if (Set == null || Set.Count == 0)
+				if (Set is null || Set.Count == 0)
 				{
 					await DI.UI.ShowMessage(new MessageBoxDialogViewModel()
 					{

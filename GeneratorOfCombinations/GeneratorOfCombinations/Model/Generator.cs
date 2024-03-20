@@ -11,7 +11,7 @@ namespace GeneratorOfCombinations
 			var combinationIndices = new int[combinationSize];
 			var combination = new StringBuilder();
 
-			for (int j = 0; j < combinationSize; j++)
+			for (var j = 0; j < combinationSize; j++)
 			{
 				combination.Append($"{set[j]} ");
 				combinationIndices[j] = j;
@@ -22,7 +22,7 @@ namespace GeneratorOfCombinations
 
 			while (NextCombination(combinationIndices, set.Count - 1))
 			{
-				for (int i = 0; i < combinationSize; ++i)
+				for (var i = 0; i < combinationSize; ++i)
 				{
 					combination.Append($"{set[combinationIndices[i]]} ");
 				}
@@ -36,15 +36,15 @@ namespace GeneratorOfCombinations
 
 		private static bool NextCombination(int[] combination, int n)
 		{
-			int combinationSize = combination.Length;
+			var combinationSize = combination.Length;
 
-			for (int i = combinationSize - 1; i >= 0; --i)
+			for (var i = combinationSize - 1; i >= 0; --i)
 			{
 				if (combination[i] < n - combinationSize + i + 1)
 				{
 					combination[i]++;
 
-					for (int j = i + 1; j < combinationSize; ++j)
+					for (var j = i + 1; j < combinationSize; ++j)
 					{
 						combination[j] = combination[j - 1] + 1;
 					}
